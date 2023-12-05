@@ -19,11 +19,11 @@ f bump active|inactive|draft
 
 ```bash
 f bump major
-# => bumps the MAJOR build number (x.0.0+y)                                                    |
+# => bumps the MAJOR build number (x.0.0+y)
 f bump minor
-# => bumps the MINOR build number (0.x.0+y)                                                    |
+# => bumps the MINOR build number (0.x.0+y)
 f bump patch
-# => bumps the PATCH build number (0.0.x+y)                                                    |
+# => bumps the PATCH build number (0.0.x+y)
 f bump build
 # => bumps the build number (1.0.0+y)  
 ```
