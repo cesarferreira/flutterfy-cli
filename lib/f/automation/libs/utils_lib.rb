@@ -7,10 +7,10 @@ require 'cfpropertylist'
 class Utils
 
 
-  def self.run_fastlane_beta
+  def self.run_fastlane(lane)
     Dir.chdir("./ios/") do
       Utils.execute "bundle exec pod install"
-      Utils.execute "bundle exec fastlane ios beta"
+      Utils.execute "bundle exec fastlane #{lane}"
     end
   end
 

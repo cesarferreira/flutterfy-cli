@@ -16,11 +16,12 @@ module F
           when "clean" then clean_rebuild(arguments)
           when "open" then handle_open_command(arguments)
           when "generate" then handle_open_command(arguments)
-          when "bump" then clean_rebuild(arguments) # TODO: bump a build number
+          when "bump" then bump(arguments) # TODO: bump a build number
           when "help" then help(arguments)
           else
             arguments[0].nil? ? help(arguments) : puts("Dont recognise the command".red)
-        end
+          
+          end
       end
 
       # when "bump" then clean_rebuild(arguments) # TODO: bump a build number
@@ -35,7 +36,7 @@ module F
         rows << ["#{binary_name} generate icon".green, 'Generates the icons for the app.']
         rows << ["#{binary_name} generate assets".green, 'Initiates asset generation and management. (using "flutter_launcher_icons")']
         rows << :separator
-        rows << ["#{binary_name} open ios".green, 'Opens appstoreconnect website.']
+        rows << ["#{binary_name} open apple".green, 'Opens appstoreconnect website.']
         rows << ["#{binary_name} open android".green, 'Opens play console website.']
         rows << :separator
         rows << ["#{binary_name} release beta".green, 'Initiates the process to release the current build to the beta track.']
@@ -81,8 +82,8 @@ module F
         end
 
         case arguments[1]
-        when "beta" then Utils.run_fastlane('beta')
-        when "release" then Utils.run_fastlane('release')
+        when "beta" then Utils.run_fastlane('ios beta')
+        when "release" then Utils.run_fastlane('ios release')
         else
           puts "Not ready for #{arguments[1].red} yet"
         end
@@ -96,6 +97,11 @@ module F
       def generate_icons(arguments)
         Utils.interrupt_if_non_flutter_project
         system("dart run flutter_launcher_icons")
+      end 
+
+      def bump(arguments)
+        Utils.interrupt_if_non_flutter_project
+        system(File.join(__dir__, "scripts/bump_version.sh pubspec.yaml"))
       end
 
       def generate_assets(arguments)
