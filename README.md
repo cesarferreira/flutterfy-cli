@@ -9,7 +9,7 @@
 
 ```bash
 f fix
-# => Automatically identifies and corrects common issues in Dart code, such as outdated syntax |
+# => Automatically identifies and corrects common issues in Dart code, such as outdated syntax
 
 ```
 ```bash
