@@ -14,7 +14,7 @@ f fix
 ```
 ```bash
 f bump major|minor|patch|build
-# => bumps the corresponding update type, it always bumps the build
+# => bumps the corresponding update type (it always bumps the build number)
 ```
 
 
