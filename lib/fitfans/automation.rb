@@ -20,28 +20,38 @@ module Fitfans
         when "generate swagger" then generate_network_layer(arguments)
         when "generate icons" then generate_icons(arguments)
         when "generate assets" then generate_assets(arguments)
-        # when "generate-splash-screen" then generate_splash_screen(arguments)
         when "release beta" then release(arguments)
         when "clean" then clean_rebuild(arguments)
+        when "open" then handle_open_command(arguments)
+        when "bump" then clean_rebuild(arguments) # TODO: bump a build number
         when "help" then help(arguments)
         else
+          puts arguments.join(' ')
 
-          trainer, pattern_found = detect_pattern(arguments.join(' '), "swagger")
+          # trainer, pattern_found = detect_pattern(arguments.join(' '), "swagger")
 
-          if pattern_found
-            Launchy.open("https://#{trainer}.fitfans.me/admin/api-docs/index.html")
-            return
-          end
+          # if pattern_found
+          #   Launchy.open("https://#{trainer}.fitfans.me/admin/api-docs/index.html")
+          #   return
+          # end
 
-          trainer, pattern_found = detect_pattern(arguments.join(' '), "admin")
+          # trainer, pattern_found = detect_pattern(arguments.join(' '), "admin")
 
-          if pattern_found
-            Launchy.open("https://#{trainer}.fitfans.me/admin/app_configuration/general")
-            return
-          end
+          # if pattern_found
+          #   Launchy.open("https://#{trainer}.fitfans.me/admin/app_configuration/general")
+          #   return
+          # end
 
           puts "Dont recognise the command"
         end
+      end
+
+      def handle_open_command(arguments)
+        case arguments[1]
+        when "apple" then Launchy.open("https://appstoreconnect.apple.com/apps")
+        when "android" then Launchy.open("https://play.google.com/console/u/0/developers/5802616250731787476/app-list?onboardingflow=signup")
+        end
+        # Handle other "open" commands here
       end
 
 
