@@ -22,30 +22,39 @@ function bump_version() {
     local old_major=$major
     local old_minor=$minor
     local old_patch=$patch
-    local old_build_number=$build_number
+    local old_build_number="${YELLOW}$build_number${RESET}"
 
     # Increment the build number
     local new_build_number=$((build_number + 1))
+
+    # Initialize new version parts for coloring
+    local new_major=$major
+    local new_minor=$minor
+    local new_patch=$patch
 
     # Determine which part to update and apply color
     case $UPDATE_TYPE in
         major)
             major=$((major + 1))
             old_major="${YELLOW}$old_major${RESET}"
+            new_major="${GREEN}$major${RESET}"
             minor=0
             patch=0
             ;;
         minor)
             minor=$((minor + 1))
             old_minor="${YELLOW}$old_minor${RESET}"
+            new_minor="${GREEN}$minor${RESET}"
             patch=0
             ;;
         patch)
             patch=$((patch + 1))
             old_patch="${YELLOW}$old_patch${RESET}"
+            new_patch="${GREEN}$patch${RESET}"
             ;;
         build)
             # Only build number will be incremented
+            new_build_number="${GREEN}$new_build_number${RESET}"
             ;;
         *)
             echo "Invalid update type: $UPDATE_TYPE"
@@ -54,28 +63,9 @@ function bump_version() {
             ;;
     esac
 
-    # Highlight the build numbers and the updated part in the new version
-    old_build_number="${YELLOW}$old_build_number${RESET}"
-    new_build_number="${GREEN}$new_build_number${RESET}"
-    local new_major="${GREEN}$major${RESET}"
-    local new_minor="${GREEN}$minor${RESET}"
-    local new_patch="${GREEN}$patch${RESET}"
-
-    # Apply green color only to the updated part
-    if [[ "$UPDATE_TYPE" == "major" ]]; then
-        new_minor=$minor
-        new_patch=$patch
-    elif [[ "$UPDATE_TYPE" == "minor" ]]; then
-        new_major=$major
-        new_patch=$patch
-    elif [[ "$UPDATE_TYPE" == "patch" ]]; then
-        new_major=$major
-        new_minor=$minor
-    fi
-
     # Print the old and new version with highlights
-    echo -e "\nfrom: " "$old_major"."$old_minor"."$old_patch"+"$old_build_number"
-    echo -e "to:   " "$new_major"."$new_minor"."$new_patch"+"$new_build_number"
+    echo -e "\nfrom: $old_major.$old_minor.$old_patch+$old_build_number"
+    echo -e "to:   $new_major.$new_minor.$new_patch+$new_build_number"
 }
 
 # Bump the version
