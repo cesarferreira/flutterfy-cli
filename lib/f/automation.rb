@@ -32,27 +32,34 @@ module F
         rows = []
         rows << ["#{binary_name} clean".green, 'Deep cleans the project and rebuilds it.']
         rows << :separator
+        rows << ["#{binary_name} fix".green, 'Automatically identifies and corrects common issues in Dart code, such as outdated syntax']
+        rows << :separator
         rows << ["#{binary_name} generate swagger".green, 'Executes a function to generate a Swagger (OpenAPI) client.']
         rows << ["#{binary_name} generate icon".green, 'Generates the icons for the app.']
         rows << ["#{binary_name} generate assets".green, 'Initiates asset generation and management. (using "flutter_launcher_icons")']
         rows << :separator
-        rows << ["#{binary_name} open apple".green, 'Opens appstoreconnect website.']
-        rows << ["#{binary_name} open android".green, 'Opens play console website.']
+        rows << ["#{binary_name} open apple".green, "Opens the #{'appstoreconnect'.yellow} website."]
+        rows << ["#{binary_name} open android".green, "Opens the #{'play console'.yellow} website."]
         rows << :separator
-        rows << ["#{binary_name} release beta".green, 'Initiates the process to release the current build to the beta track.']
-        rows << ["#{binary_name} release release".green, 'Initiates the process to release the current build to the production track.']
+        rows << ["#{binary_name} release beta".green, "Releases the current build to the #{'beta'.yellow} track."]
+        rows << ["#{binary_name} release production".green, "Releases the current build to the #{'production'.yellow} track."]
+        rows << :separator
+        rows << ["#{binary_name} bump major".green, "bumps the #{'MAJOR'.yellow} build number (#{'x'.yellow}.0.0+#{'y'.yellow})"] # ESTEEEEE
+        rows << ["#{binary_name} bump minor".green, "bumps the #{'MINOR'.yellow} build number (0.#{'x'.yellow}.0+#{'y'.yellow})"]
+        rows << ["#{binary_name} bump patch".green, "bumps the #{'PATCH'.yellow} build number (0.0.0.#{'y'.yellow})"]
+        rows << ["#{binary_name} bump build".green, "bumps the #{'build number'.yellow} (1.0.0+#{'y'.yellow})"]
         rows << :separator
         rows << ["#{binary_name} help".green, 'Shows a table with all the available commands.']
         # Create a table
-        table = Terminal::Table.new :headings => ['Command', 'Description'], :rows => rows
+        table = Terminal::Table.new :headings => ['Command'.bold, 'Description'.bold], :rows => rows
 
         puts table
       end
 
       def handle_open_command(arguments)
         case arguments[1]
-          when "apple" then Launchy.open("https://appstoreconnect.apple.com/apps")
-          when "android" then Launchy.open("https://play.google.com/console/u/0/developers/5802616250731787476/app-list")
+          when "apple","ios" then Launchy.open("https://appstoreconnect.apple.com/apps")
+          when "google","android" then Launchy.open("https://play.google.com/console/u/0/developers/")
           else
             puts "Dont recognise the command"
         end
@@ -101,7 +108,16 @@ module F
 
       def bump(arguments)
         Utils.interrupt_if_non_flutter_project
-        system(File.join(__dir__, "scripts/bump_version.sh pubspec.yaml"))
+        case arguments[1]
+        when "major" then system(File.join(__dir__, "scripts/bump_version.sh pubspec.yaml major"))
+        when "minor" then system(File.join(__dir__, "scripts/bump_version.sh pubspec.yaml minor"))
+        when "patch" then system(File.join(__dir__, "scripts/bump_version.sh pubspec.yaml patch"))
+        when "build" then system(File.join(__dir__, "scripts/bump_version.sh pubspec.yaml build"))
+        else
+          puts "Not ready for #{arguments[1].red} yet"
+        end
+
+        
       end
 
       def generate_assets(arguments)
