@@ -13,7 +13,5 @@ gem "httparty", "~> 0.20.0"
 gem "terminal-table", "~> 3.0"
 gem "CFPropertyList", "~> 3.0"
 gem "cocoapods", "~> 1.11"
-# gem "fastlane"
 gem "tmpdir", "~> 0.1.2"
-
 gem "launchy", "~> 2.5"

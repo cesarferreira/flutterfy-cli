@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative "lib/fitfans/automation/version"
+require_relative "lib/f/automation/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "fitfans-automation"
-  spec.version = Fitfans::Automation::VERSION
+  spec.name = "f"
+  spec.version = F::Automation::VERSION
   spec.authors = ["Cesar Ferreira"]
   spec.email = ["cesar.manuel.ferreira@gmail.com"]
 
