@@ -46,7 +46,7 @@ module F
         rows << :separator
         rows << ["#{binary_name} bump major".green, "bumps the #{'MAJOR'.yellow} build number (#{'x'.yellow}.0.0+#{'y'.yellow})"] # ESTEEEEE
         rows << ["#{binary_name} bump minor".green, "bumps the #{'MINOR'.yellow} build number (0.#{'x'.yellow}.0+#{'y'.yellow})"]
-        rows << ["#{binary_name} bump patch".green, "bumps the #{'PATCH'.yellow} build number (0.0.0.#{'y'.yellow})"]
+        rows << ["#{binary_name} bump patch".green, "bumps the #{'PATCH'.yellow} build number (0.0.#{'x'.yellow}+#{'y'.yellow})"]
         rows << ["#{binary_name} bump build".green, "bumps the #{'build number'.yellow} (1.0.0+#{'y'.yellow})"]
         rows << :separator
         rows << ["#{binary_name} help".green, 'Shows a table with all the available commands.']
