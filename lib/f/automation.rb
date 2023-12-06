@@ -36,7 +36,7 @@ module F
         rows << :separator
         rows << ["#{binary_name} generate swagger".green, 'Executes a function to generate a Swagger (OpenAPI) client.']
         rows << ["#{binary_name} generate icon".green, 'Generates the icons for the app.']
-        rows << ["#{binary_name} generate assets".green, 'Initiates asset generation and management. (using "flutter_launcher_icons")']
+        rows << ["#{binary_name} generate assets".green, 'Initiates asset generation and management. (using "fluttergen")']
         rows << :separator
         rows << ["#{binary_name} open apple".green, "Opens the #{'appstoreconnect'.yellow} website."]
         rows << ["#{binary_name} open android".green, "Opens the #{'play console'.yellow} website."]

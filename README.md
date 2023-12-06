@@ -30,8 +30,8 @@ f bump major|minor|patch|build
 ```bash
 f generate swagger|icon|assets
 # => swagger: Executes a function to generate a Swagger (OpenAPI) client.
-# => icon: Generates the icons for the app.
-# => assets: Initiates asset generation and management. (using "flutter_launcher_icons")
+# => icon: Generates the icons for the app. (using "flutter_launcher_icons")
+# => assets: Initiates asset generation and management. (using "fluttergen")
 ```
 
 ```bash
