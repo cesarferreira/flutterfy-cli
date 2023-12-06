@@ -46,6 +46,15 @@ f release beta|production
 # => production: the current build to the production track.
 ```
 
+## Install
+Clone the repo in your designated folder
+```bash
+git clone git@github.com:cesarferreira/flutterfy-cli.git
+```
+Now add to your `~/.bashrc` or `~/.zshrc`
+```bash
+alias f="ruby -Ilib PATH_TO_GEM_FOLDER/f/bin/f"
+```
 
 
 ## Nice to Have
