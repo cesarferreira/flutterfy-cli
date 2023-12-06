@@ -1,9 +1,12 @@
 # flutterfy-cli
 > Combination of `Flutter` + `Simplify`
 
+> Instead of copy pasting scripts for every new flutter project I'm working on I can just run `f` on a flutter project and run these common daily tasks.
+
 <p align="center">
   <img src="assets/ss.png" width="100%" />
 </p>
+
 
 ## Usage
 
