@@ -1,4 +1,5 @@
-# Flutter::Automation
+# flutterfy-cli
+> Combination of `Flutter` + `Simplify`
 
 <p align="center">
   <img src="assets/ss.png" width="100%" />
