@@ -61,4 +61,4 @@ alias f="ruby -Ilib PATH_TO_GEM_FOLDER/f/bin/f"
 
 
 ## Nice to Have
-- [ ] be able to list all the actions with some `f actions`
+- [ ] listen to build_runner changes `flutter pub run build_runner watch -d`

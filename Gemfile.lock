@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    f (0.1.0)
+    flutterfy-cli (0.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -92,7 +92,7 @@ GEM
       addressable (~> 2.8)
     mime-types (3.5.1)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2023.1003)
+    mime-types-data (3.2023.1205)
     minitest (5.20.0)
     molinillo (0.8.0)
     multi_xml (0.6.0)
@@ -157,13 +157,13 @@ GEM
       rexml (~> 3.2.4)
 
 PLATFORMS
-  arm64-darwin-22
+  arm64-darwin-23
 
 DEPENDENCIES
   CFPropertyList (~> 3.0)
   cocoapods (~> 1.11)
   colorize (~> 0.8.1)
-  f!
+  flutterfy-cli!
   httparty (~> 0.20.0)
   launchy (~> 2.5)
   rake (~> 13.0)
