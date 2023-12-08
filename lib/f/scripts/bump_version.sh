@@ -19,42 +19,25 @@ function bump_version() {
     local patch=$(echo "$version" | cut -d. -f3)
     local build_number=$(echo "$version_line" | sed -E 's/version: [0-9]+\.[0-9]+\.[0-9]+\+([0-9]+)/\1/')
 
-    local old_major=$major
-    local old_minor=$minor
-    local old_patch=$patch
-    local old_build_number="${YELLOW}$build_number${RESET}"
-
     # Increment the build number
     local new_build_number=$((build_number + 1))
 
-    # Initialize new version parts for coloring
-    local new_major=$major
-    local new_minor=$minor
-    local new_patch=$patch
-
-    # Determine which part to update and apply color
+    # Determine which part to update
     case $UPDATE_TYPE in
         major)
             major=$((major + 1))
-            old_major="${YELLOW}$old_major${RESET}"
-            new_major="${GREEN}$major${RESET}"
             minor=0
             patch=0
             ;;
         minor)
             minor=$((minor + 1))
-            old_minor="${YELLOW}$old_minor${RESET}"
-            new_minor="${GREEN}$minor${RESET}"
             patch=0
             ;;
         patch)
             patch=$((patch + 1))
-            old_patch="${YELLOW}$old_patch${RESET}"
-            new_patch="${GREEN}$patch${RESET}"
             ;;
         build)
             # Only build number will be incremented
-            new_build_number="${GREEN}$new_build_number${RESET}"
             ;;
         *)
             echo "Invalid update type: $UPDATE_TYPE"
@@ -63,9 +46,15 @@ function bump_version() {
             ;;
     esac
 
-    # Print the old and new version with highlights
-    echo -e "\nfrom: $old_major.$old_minor.$old_patch+$old_build_number"
-    echo -e "to:   $new_major.$new_minor.$new_patch+$new_build_number"
+    # Form new version string
+    local new_version="$major.$minor.$patch+$new_build_number"
+
+    # Update the version in the pubspec.yaml
+    sed -i '' "s/$version_line/version: $new_version/" "$PUBSPEC_PATH"
+
+    # Print the old and new version
+    echo -e "\nfrom: ${YELLOW}$version+$build_number${RESET}"
+    echo -e "to:   ${GREEN}$new_version${RESET}"
 }
 
 # Bump the version

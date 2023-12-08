@@ -3,7 +3,7 @@
 require_relative "automation/version"
 require_relative "automation/libs/creators_lib"
 require_relative "automation/libs/utils_lib"
-require 'launchy'
+require "launchy"
 
 module F
   module Automation
@@ -11,17 +11,17 @@ module F
       def initialize(arguments)
     
         case arguments[0]
-          when "generate" then handle_generate_command(arguments)
-          when "release" then release(arguments)
-          when "clean" then clean_rebuild(arguments)
-          when "open" then handle_open_command(arguments)
-          when "generate" then handle_open_command(arguments)
-          when "bump" then bump(arguments) # TODO: bump a build number
-          when "help" then help(arguments)
-          else
-            arguments[0].nil? ? help(arguments) : puts("Dont recognise the command".red)
-          
-          end
+        when "generate" then handle_generate_command(arguments)
+        when "release" then release(arguments)
+        when "clean" then clean_rebuild(arguments)
+        when "open" then handle_open_command(arguments)
+        when "generate" then handle_open_command(arguments)
+        when "bump" then bump(arguments) # TODO: bump a build number
+        when "help" then help(arguments)
+        else
+          arguments[0].nil? ? help(arguments) : puts("Dont recognise the command".red)
+        
+        end
       end
 
       # when "bump" then clean_rebuild(arguments) # TODO: bump a build number
