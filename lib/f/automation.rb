@@ -8,8 +8,8 @@ require "launchy"
 
 module F
   module Automation
-    class Main 
-      def initialize(arguments)
+    class Main # rubocop:disable Style/Documentation
+      def initialize(arguments) # rubocop:disable Metrics/CyclomaticComplexity
         case arguments[0]
         when "generate" then handle_generate_command(arguments)
         when "release" then release(arguments)
@@ -17,15 +17,14 @@ module F
         when "open" then handle_open_command(arguments)
         when "fix" then dart_fix(arguments)
         when "bump" then bump(arguments)
+        when "watch" then watch(arguments)
         when "help" then help(arguments)
         else
           arguments[0].nil? ? help(arguments) : puts("Dont recognise the command".red)
         end
       end
 
-      # when "bump" then clean_rebuild(arguments) # TODO: bump a build number
-
-      def help(_arguments)
+      def help(_arguments) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
         binary_name = "f"
         # Define the rows of the table
         rows = []
@@ -39,6 +38,8 @@ module F
         rows << ["#{binary_name} generate assets".green,
                  'Initiates asset generation and management. (using "fluttergen")']
         rows << :separator
+        rows << ["#{binary_name} watch".green, "#{"watch build_runner".yellow} for code changes."]
+        rows << :separator
         rows << ["#{binary_name} open apple".green, "Opens the #{"appstoreconnect".yellow} website."]
         rows << ["#{binary_name} open android".green, "Opens the #{"play console".yellow} website."]
         rows << :separator
@@ -46,7 +47,7 @@ module F
         rows << ["#{binary_name} release production".green,
                  "Releases the current build to the #{"production".yellow} track."]
         rows << :separator
-        rows << ["#{binary_name} bump major".green, "bumps the #{"MAJOR".yellow} build number (#{"x".yellow}.0.0+#{"y".yellow})"] # ESTEEEEE
+        rows << ["#{binary_name} bump major".green, "bumps the #{"MAJOR".yellow} build number (#{"x".yellow}.0.0+#{"y".yellow})"]
         rows << ["#{binary_name} bump minor".green,
                  "bumps the #{"MINOR".yellow} build number (0.#{"x".yellow}.0+#{"y".yellow})"]
         rows << ["#{binary_name} bump patch".green,
@@ -130,6 +131,11 @@ module F
       def dart_fix(_arguments)
         Utils.interrupt_if_non_flutter_project
         Utils.execute "dart fix --apply"
+      end
+
+      def watch(_arguments)
+        Utils.interrupt_if_non_flutter_project
+        Utils.execute "dart run build_runner watch"
       end
 
       #
