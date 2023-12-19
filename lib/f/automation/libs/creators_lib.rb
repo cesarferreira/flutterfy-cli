@@ -1,10 +1,11 @@
-require "httparty"
+# frozen_string_literal: true
+
+# require "httparty"
 require "json"
 require "colorize"
 require "terminal-table"
 
 class Creators
-  
   # def self.create_new_app(subdomain, bundle_id, app_name)
   #   # TODO: get config and use the values from there, easy!!
   #   require "tmpdir"
@@ -28,5 +29,4 @@ class Creators
   def self.create_app(bundle_id, app_name)
     Utils.execute "bundle exec fastlane ios create_new_app app_identifier:\"#{bundle_id}\" app_name:\"#{app_name}\""
   end
-  
 end

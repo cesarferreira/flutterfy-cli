@@ -11,3 +11,13 @@ Style/StringLiteralsInInterpolation:
 
 Layout/LineLength:
   Max: 120
+
+Metrics/ClassLength:
+  Max: 150
+
+Metrics/MethodLength: 
+  Max: 30
+
+Metrics/AbcSize:
+  Max: 55 # Or any value that you find suitable
+

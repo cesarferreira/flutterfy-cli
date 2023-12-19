@@ -3,7 +3,7 @@
 require_relative "lib/f/automation/version"
 
 Gem::Specification.new do |spec|
-  spec.name = 'flutterfy-cli'
+  spec.name = "flutterfy-cli"
   spec.version = F::Automation::VERSION
   spec.authors = ["Cesar Ferreira"]
   spec.email = ["cesar.manuel.ferreira@gmail.com"]
@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
       (f == __FILE__) || f.match(%r{\A(?:(?:bin|test|spec|features)/|\.(?:git|travis|circleci)|appveyor)})
     end
   end
-  spec.bindir        = 'bin'
+  spec.bindir = "bin"
   spec.executables = spec.files.grep(%r{\Abin/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 

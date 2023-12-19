@@ -1,12 +1,12 @@
-require 'httparty'
-require 'json'
-require 'colorize'
-require 'terminal-table'
-require 'cfpropertylist'
+# frozen_string_literal: true
+
+# require 'httparty'
+require "json"
+require "colorize"
+require "terminal-table"
+require "cfpropertylist"
 
 class Utils
-
-
   def self.run_fastlane(lane)
     Dir.chdir("./ios/") do
       Utils.execute "bundle exec pod install"
@@ -16,25 +16,24 @@ class Utils
 
   # TODO: bump a build number
 
-
-  def self.replace_launcher_icon()
-    # system("wget '#{logo_url}' -O ./assets/logo.png")  
+  def self.replace_launcher_icon
+    # system("wget '#{logo_url}' -O ./assets/logo.png")
     system("dart run flutter_launcher_icons")
   end
 
-  def self.generate_splash_screen(watermark_url, color, is_powered_by_on)
+  def self.generate_splash_screen(_watermark_url, _color, _is_powered_by_on)
     system("dart run flutter_native_splash:create --path=splash.yaml")
   end
 
-  # TODO: replace with 
+  # TODO: replace with
   def self.is_flutter_project
-    File.file?('./pubspec.yaml')
+    File.file?("./pubspec.yaml")
   end
 
   def self.interrupt_if_non_flutter_project
-    abort("This is not a flutter project...".red)  if !is_flutter_project
+    abort("This is not a flutter project...".red) unless is_flutter_project
   end
-    
+
   def self.title(text)
     puts ""
     puts "==> ".bold.blue + text.bold
@@ -42,18 +41,18 @@ class Utils
   end
 
   def self.configure_fastlane
-    system('flutterfire configure -y')
+    system("flutterfire configure -y")
   end
 
   def self.execute(command)
     is_success = system command
     # is_success = Bundler::system command
-    unless is_success
-      puts "\n\n======================================================\n\n"
-      puts ' Something went wrong while executing this:'.red
-      puts "  $ #{command}\n".yellow
-      puts "======================================================\n\n"
-      exit 1
-    end
+    return if is_success
+
+    puts "\n\n======================================================\n\n"
+    puts " Something went wrong while executing this:".red
+    puts "  $ #{command}\n".yellow
+    puts "======================================================\n\n"
+    exit 1
   end
 end
