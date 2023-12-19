@@ -9,8 +9,8 @@ require "cfpropertylist"
 class Utils
   def self.run_fastlane(lane)
     Dir.chdir("./ios/") do
-      Utils.execute "bundle exec pod install"
-      Utils.execute "bundle exec fastlane #{lane}"
+      Utils.execute "pod install"
+      Utils.execute "fastlane #{lane}"
     end
   end
 
@@ -46,7 +46,7 @@ class Utils
 
   def self.execute(command)
     is_success = system command
-    # is_success = Bundler::system command
+    # is_success = :system command
     return if is_success
 
     puts "\n\n======================================================\n\n"

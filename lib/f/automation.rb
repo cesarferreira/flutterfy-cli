@@ -15,6 +15,7 @@ module F
         when "release" then release(arguments)
         when "clean" then clean_rebuild(arguments)
         when "open" then handle_open_command(arguments)
+        when "fix" then dart_fix(arguments)
         when "bump" then bump(arguments)
         when "help" then help(arguments)
         else
@@ -124,6 +125,11 @@ module F
       def generate_assets(_arguments)
         Utils.interrupt_if_non_flutter_project
         Utils.execute "fluttergen -c pubspec.yaml"
+      end
+
+      def dart_fix(_arguments)
+        Utils.interrupt_if_non_flutter_project
+        Utils.execute "dart fix --apply"
       end
 
       #
