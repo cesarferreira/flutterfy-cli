@@ -135,7 +135,7 @@ module F
 
       def watch(_arguments)
         Utils.interrupt_if_non_flutter_project
-        Utils.execute "dart run build_runner watch"
+        Utils.execute "dart run build_runner watch --delete-conflicting-outputs"
       end
 
       #
@@ -149,7 +149,11 @@ module F
         Dir.chdir("./ios/") do
           # Utils.execute "bundle install"
           Utils.execute "rm -rf Podfile.lock"
-          Utils.execute "pod install"
+          if File.exist?("Podfile")
+            Utils.execute "pod install"
+          else
+            puts "Podfile not found. Skipping pod install."
+          end
         end
       end
     end
